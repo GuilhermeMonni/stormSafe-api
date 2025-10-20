@@ -5,7 +5,6 @@ import cors from '@fastify/cors'
 dotenv.config()
 
 const server = fastify({ logger: true })
-const apiKey = process.env.WEATHER_API
 
 await server.register(cors, {
   origin: '*' //take domain front-end
