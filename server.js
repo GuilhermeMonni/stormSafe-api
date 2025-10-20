@@ -11,12 +11,12 @@ await server.register(cors, {
 })
 
 server.get('/climate/:city', async (req, rep) => {
-  const { city } = req.params;
+  const { lat, lon } = req.params;
   const apiKey = process.env.WEATHER_API;
 
   try {
     const res = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(city)}&aqi=yes&lang=pt-br`
+      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon})}&aqi=yes&lang=pt-br`
     );
     
     if (!res.ok) {
