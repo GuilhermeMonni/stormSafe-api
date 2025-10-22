@@ -24,7 +24,16 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
     }
 
     const data = await res.json()
-    return rep.status(200).send(data)
+
+    return rep.status(200).send({
+      city: data.location.name, //city name
+      country: data.location.country, //country name
+      region: data.location.region, //region
+      date: data.location.localtime, //date and hour
+      temp: data.current.temp_c, //temperature
+      condition: data.current.condition, //text and icon
+      humidity: data.current.humidity, //humidity
+    })
   }catch (err) {
     return rep.status(500).send({ error: 'Erro ao buscar clima!' })
   }
