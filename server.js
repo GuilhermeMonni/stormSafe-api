@@ -32,7 +32,6 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
       date: data.location.localtime, //date and hour
       temp: data.current.temp_c, //temperature
       text: data.current.condition.text, //text 
-      icon: data.current.condition.icon, //icon
       humidity: data.current.humidity, //humidity
     })
   }catch (err) {
