@@ -24,6 +24,82 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
     }
 
     const data = await res.json()
+    let dataText
+
+    switch(data.current.condition.code) { //code text condition
+        case 1000:
+          dataText = "Ensolarado"
+          break
+        case 1003:
+          dataText = "Parcialmente nublado"
+          break
+        case 1006:
+          dataText = "Nublado"
+          break
+        case 1030:
+          dataText = "Névoa"
+          break
+        case 1114:
+          dataText = "Neve com vento"
+          break
+        case 1117:
+          dataText = "Nevasca"
+          break
+        case 1135:
+          dataText = "Nevoeiro"
+          break
+        case 1153:
+          dataText = "Garoa leve"
+          break
+        case 1168:
+          dataText = "Garoa"
+          break
+        case 1171:
+          dataText = "Garoa forte"
+          break
+        case 1183:
+          dataText = "Chuva leve"
+          break
+        case 1189:
+          dataText = "Chuva moderada"
+          break
+        case 1195:
+          dataText = "Chuva forte"
+          break
+        case 1204:
+          dataText = "Granizo leve"
+          break
+        case 1213:
+          dataText = "Neve leve"
+          break
+        case 1219:
+          dataText = "Neve moderada"
+          break
+        case 1225:
+          dataText = "Neve forte"
+          break
+        case 1240:
+          dataText = "Pancada leve"
+          break
+        case 1243:
+          dataText = "Pancada moderada"
+          break
+        case 1273:
+          dataText = "Chuva leve"
+          break
+        case 1276:
+          dataText = "Chuva moderada"
+          break
+        case 1279:
+          dataText = "Neve leve"
+          break
+        case 1282:
+          dataText = "Neve moderada"
+          break
+        default:
+          dataText = "Ambíguo"
+          break
+    } 
 
     return rep.status(200).send({
       city: data.location.name, //city name
@@ -31,7 +107,7 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
       region: data.location.region, //region
       date: data.location.localtime, //date and hour
       temp: data.current.temp_c, //temperature
-      text: data.current.condition.text, //text 
+      text: dataText, //text 
       humidity: data.current.humidity, //humidity
     })
   }catch (err) {
