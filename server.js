@@ -10,6 +10,7 @@ await server.register(cors, {
   origin: '*' //take domain front-end
 })
 
+//weather api
 server.get('/climate/:lat/:lon', async (req, rep) => {
   const { lat, lon } = req.params
   const apiKey = process.env.WEATHER_API
@@ -114,6 +115,9 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
     return rep.status(500).send({ error: 'Erro ao buscar clima!' })
   }
 });
+
+//news api
+
 
 //init server
 const start = async () => {
