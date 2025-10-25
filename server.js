@@ -116,8 +116,18 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
   }
 });
 
-//news api
+//api alerts
+server.get('/alerts', async (req, rep) => {
+  const apiKey = process.env.NEWS_API
 
+  const response = await fetch(`https://api.mediastack.com/v1/news?access_key=${apiKey}&keywords=temperatura&countries=br`)
+
+  const data = await response.json()
+
+  rep.status(200).send({
+    data
+  })
+})
 
 //init server
 const start = async () => {
