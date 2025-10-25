@@ -127,6 +127,10 @@ server.get('/alerts', async (req, rep) => {
 
   if(data.error){
     res = 'Limite de requisições excedido!'
+
+    rep.status(200).send({
+    res
+  })
   }
 
   rep.status(200).send({
