@@ -123,9 +123,14 @@ server.get('/alerts', async (req, rep) => {
   const response = await fetch(`https://api.mediastack.com/v1/news?access_key=${apiKey}&keywords=temperatura&countries=br`)
 
   const data = await response.json()
+  let res = data
+
+  if(data.error){
+    res = 'Limite de requisições excedido!'
+  }
 
   rep.status(200).send({
-    data
+    res
   })
 })
 
