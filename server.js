@@ -120,22 +120,30 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
 server.get('/alerts', async (req, rep) => {
   const apiKey = process.env.NEWS_API
 
-  const response = await fetch(`https://api.mediastack.com/v1/news?access_key=${apiKey}&keywords=temperatura&countries=br`)
+  //api media stack
+  const response = await fetch(`https://api.mediastack.com/v1/news?access_key=${apiKey}&limit=20&keywords=temperatura,clima&countries=br`)
 
   const data = await response.json()
-  let res = data
 
-  if(data.error){
-    res = 'Limite de requisições excedido!'
+  if(data.error){//api news data io
+    const apiKey2 = process.env.NEWS2_API
+    const response2 = await fetch(`https://newsdata.io/api/1/news?apikey=${apiKey2}&country=br&language=pt&q=temperatura,clima&size=10`)
 
-    rep.status(200).send({
-    res
-  })
+    const data2 = await response2.json()
+    return rep.status(200).send({ //return news data
+      article_id: data2.article_id,
+      title: data2.title,
+      link: data2.link,
+      description: data2.description,
+      img_url: data2.image_url
+    })
   }
 
-  rep.status(200).send({
-    res
-  })
+  if(!data.error){//api media stack
+    return rep.status(200).send({
+      data
+    })
+  }
 })
 
 //init server
