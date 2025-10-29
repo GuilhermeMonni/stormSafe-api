@@ -136,15 +136,9 @@ server.get('/alerts', async (req, rep) => {
   }
 
   //api media stack
-<<<<<<< HEAD
     return rep.status(200).send({
       data
     })
-=======
-  return rep.status(200).send({
-    data
-  })
->>>>>>> 066f5cf (fix return)
 })
 
 //init server
