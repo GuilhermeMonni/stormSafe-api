@@ -131,19 +131,14 @@ server.get('/alerts', async (req, rep) => {
 
     const data2 = await response2.json()
     return rep.status(200).send({ //return news data
-      article_id: data2.article_id,
-      title: data2.title,
-      link: data2.link,
-      description: data2.description,
-      img_url: data2.image_url
+      data2
     })
   }
 
-  if(!data.error){//api media stack
-    return rep.status(200).send({
-      data
-    })
-  }
+  //api media stack
+  return rep.status(200).send({
+    data
+  })
 })
 
 //init server
