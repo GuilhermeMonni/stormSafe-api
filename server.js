@@ -117,28 +117,25 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
 });
 
 //api alerts
-server.get('/alerts', async (req, rep) => {
+server.get('/alerts', async (req, rep) => { //api news data
   const apiKey = process.env.NEWS_API
 
-  //api media stack
-  const response = await fetch(`https://api.mediastack.com/v1/news?access_key=${apiKey}&limit=20&keywords=temperatura,clima&countries=br`)
+  const response = await fetch(`https://newsdata.io/api/1/news?apikey=${apiKey}&country=br&language=pt&q=temperatura,brasil,clima&size=10`)
 
   const data = await response.json()
 
-  if(data.error){//api news data io
-    const apiKey2 = process.env.NEWS2_API
-    const response2 = await fetch(`https://newsdata.io/api/1/news?apikey=${apiKey2}&country=br&language=pt&q=temperatura,clima&size=10`)
+  const dataResponse = data.results.map(a => ({
+    id: a.article_id,
+    title: a.title,
+    link: a.link,
+    description: a.description,
+    img: a.image_url,
+    sourceIcon: a.source_icon
+  }))
 
-    const data2 = await response2.json()
-    return rep.status(200).send({ //return news data
-      data2
-    })
-  }
-
-  //api media stack
-    return rep.status(200).send({
-      data
-    })
+  return rep.status(200).send({ //return news data
+    dataResponse
+  })
 })
 
 //init server
