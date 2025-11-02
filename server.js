@@ -120,7 +120,7 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
 server.get('/alerts', async (req, rep) => { //api news data
   const apiKey = process.env.NEWS_API
 
-  const response = await fetch(`https://newsdata.io/api/1/news?apikey=${apiKey}&country=br&language=pt&q=previsão tempo,meteorologia,clima&size=10`)
+  const response = await fetch(`https://newsdata.io/api/1/news?apikey=${apiKey}&country=br&language=pt&q=temperatura,tempo,meteorologia,clima&size=10`)
 
   const data = await response.json()
 
