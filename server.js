@@ -25,11 +25,15 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
     }
 
     const data = await res.json()
+
+    const date = new Date() //get hours 
+    const hour = date.getHours()
+
     let dataText
 
     switch(data.current.condition.code) { //code text condition
         case 1000:
-          dataText = "Ensolarado"
+          hour >= 18 ? dataText = "Limpo" : dataText = "Ensolarado"
           break
         case 1003:
           dataText = "Parcialmente nublado"
