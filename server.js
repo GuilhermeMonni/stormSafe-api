@@ -103,7 +103,7 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
           dataText = "Neve moderada"
           break
         default:
-          dataText = "Clima indefinido"
+          dataText = "Condições variáveis"
           break
     } 
 
