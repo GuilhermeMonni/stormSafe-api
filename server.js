@@ -30,6 +30,7 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
     const hour = date.getHours()
 
     let dataText
+    console.log(data.current.condition.code)
 
     switch(data.current.condition.code) { //code text condition
         case 1000:
@@ -102,7 +103,7 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
           dataText = "Neve moderada"
           break
         default:
-          dataText = "Ambíguo"
+          dataText = "Clima indefinido"
           break
     } 
 
