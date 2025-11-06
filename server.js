@@ -112,6 +112,8 @@ server.get('/climate/:lat/:lon', async (req, rep) => {
       region: data.location.region, //region
       date: data.location.localtime, //date and hour
       temp: data.current.temp_c, //temperature
+      sense: data.current.feelslike_c, //sense 
+      wind: data.current.wind_kph, //wind 
       text: dataText, //text 
       humidity: data.current.humidity, //humidity
     })
